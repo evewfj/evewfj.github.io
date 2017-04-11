@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <style>
         .imgsShow {
-            width: 800px;
+            width: 100%;
             overflow: hidden;
         }
         
@@ -44,13 +44,40 @@
             padding: 0;
             border: 0;
         }
+        
+        #leftButton {
+            width: 32px;
+            height: 50px;
+            background-image: url("img/leftstart.jpg");
+            position: fixed;
+            top: 75px;
+            left: 20px;
+            visibility: hidden;
+        }
+        
+        #rightButton {
+            width: 32px;
+            height: 50px;
+            background-image: url("img/rightstart.jpg");
+            position: fixed;
+            top: 75px;
+            right: 20px;
+            visibility: hidden;
+        }
+        
+        .imgsShow:hover #leftButton {
+            visibility: visible;
+        }
+        
+        .imgsShow:hover #rightButton {
+            visibility: visible;
+        }
     </style>
 </head>
 
 <body>
 <div class="imgsShow" id="imgsShowStage">
-    <div class="leftButton"></div>
-    <div class="rightButton"></div>
+    
     <div id="imgsContainer">
         <ul id="u1">
             <li>
@@ -68,6 +95,8 @@
         </ul>
         <ul id="u2"></ul>
     </div>
+    <div id="leftButton"></div>
+    <div id="rightButton"></div>
 </div>
 <script>
     var container = document.getElementById("imgsContainer");
@@ -83,44 +112,43 @@
     var itemWidth = itemMem.clientWidth;//获得此图片的宽度.
     u1.style.width = itemWidth * itemNum + 'px';//计算出ul的长度
     container.style.width = itemWidth * itemNum * 2 + 'px';//计算图片容器的长度.
-    var imgsContainerWidth = itemWidth * itemNum * 2;
+    var firstImgsContainerWidth = itemWidth * itemNum;//this is u1 width
     var lastPosition = 0;
 
+    var directoin = 'left';
     function move() {
-        lastPosition += 10;
-        if (lastPosition > imgsContainerWidth - showStageWidth) {
-            lastPosition = 0;
+        if (directoin === 'left') {
+            lastPosition += 10;
+            if (lastPosition >= firstImgsContainerWidth) {
+                lastPosition = 0;
+            }
+        }
+        else {
+            lastPosition -= 10;
+            if (lastPosition <= firstImgsContainerWidth - showStageWidth)
+            {
+                lastPosition += firstImgsContainerWidth;
+            }
+
         }
         container.style.left = -lastPosition + 'px';
 
-        $(".leftButton").click(function(){
-            if(page_count>page){
-                $picDiv.animate({left:'-'+page*$pDiv_w+"px"},"normal");
-                page++;
-                $(".leftButton").css({'background':'url(img/leftstart.jpg) no-repeat'});
-                if(page>=page_count){
-                    $(this).css({'background':'url(img/rightstop.jpg) no-repeat'});
-                }else{
-                    $(this).css({'background':'url(img/rightstart.jpg) no-repeat'});
-                }
-            }
-            $(this).siblings(".highlight_tip").find("span").eq((page-1)).addClass("current").siblings().removeClass("current");
-        });
-        $(".left_btn").click(function(){
-            if(page>1){
-                $picDiv.animate({left:"+="+$pDiv_w+'px'},"normal");
-                page--;
-                $(".rightButton").css({'background':'url(images/rightstart.jpg) no-repeat'});
-                if(page<=1){
-                    $(this).css({'background':'url(images/leftstop.jpg) no-repeat'});
-                }else{
-                    $(this).css({'background':'url(images/leftstart.jpg) no-repeat'});
-                }
-            }
-            $(this).siblings(".highlight_tip").find("span").eq((page-1)).addClass("current").siblings().removeClass("current");
-        });
     }
-    setInterval(move, 500);
+    setInterval(move, 100);
+
+    var leftButton = document.getElementById('leftButton');
+    var rightButton = document.getElementById('rightButton');
+    leftButton.addEventListener('click', function (evt) {
+        console.log('you have click leftbutton ');
+        directoin = 'left';
+    });
+    rightButton.addEventListener('click', function (evt) {
+        console.log('you have click rightButton');
+        console.log(evt);
+        directoin = 'right';
+
+    });
+
 </script>
 </body>
 
