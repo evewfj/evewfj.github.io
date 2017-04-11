@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .imgsShow {
+            width: 800px;
+            overflow: hidden;
+        }
+        
+        #imgsContainer {
+            width: 2500px;
+            position: relative;
+            right: 10px;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        
+        .imgsShow ul li {
+            width: 300px;
+            height: 200px;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            display: block;
+            float: left;
+        }
+        
+        .imgsShow ul img {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        
+        .imgsShow ul {
+            list-style: none;
+            display: inline;
+            float: left;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+    </style>
+</head>
+
+<body>
+<div class="imgsShow" id="imgsShowStage">
+    <div class="leftButton"></div>
+    <div class="rightButton"></div>
+    <div id="imgsContainer">
+        <ul id="u1">
+            <li>
+                <a href="#"><img src="img/img1.jpg"/></a>
+            </li>
+            <li>
+                <a href="#"><img src="img/img2.jpg"/></a>
+            </li>
+            <li>
+                <a href="#"><img src="img/img3.jpg"/></a>
+            </li>
+            <li>
+                <a href="#"><img src="img/img4.jpg"/></a>
+            </li>
+        </ul>
+        <ul id="u2"></ul>
+    </div>
+</div>
+<script>
+    var container = document.getElementById("imgsContainer");
+    var showStage = document.getElementById("imgsShowStage");
+    var showStageWidth = showStage.clientWidth;
+    //past u1 to u2.
+    var u1 = document.getElementById("u1");
+    var u2 = document.getElementById("u2");
+    u2.innerHTML = u1.innerHTML;
+    //calculate the container width.
+    var itemNum = u1.children.length;//ul列表中li的个数.
+    var itemMem = u1.children[0];//获得li中第一个图片.
+    var itemWidth = itemMem.clientWidth;//获得此图片的宽度.
+    u1.style.width = itemWidth * itemNum + 'px';//计算出ul的长度
+    container.style.width = itemWidth * itemNum * 2 + 'px';//计算图片容器的长度.
+    var imgsContainerWidth = itemWidth * itemNum * 2;
+    var lastPosition = 0;
+
+    function move() {
+        lastPosition += 10;
+        if (lastPosition > imgsContainerWidth - showStageWidth) {
+            lastPosition = 0;
+        }
+        container.style.left = -lastPosition + 'px';
+
+        $(".leftButton").click(function(){
+            if(page_count>page){
+                $picDiv.animate({left:'-'+page*$pDiv_w+"px"},"normal");
+                page++;
+                $(".leftButton").css({'background':'url(img/leftstart.jpg) no-repeat'});
+                if(page>=page_count){
+                    $(this).css({'background':'url(img/rightstop.jpg) no-repeat'});
+                }else{
+                    $(this).css({'background':'url(img/rightstart.jpg) no-repeat'});
+                }
+            }
+            $(this).siblings(".highlight_tip").find("span").eq((page-1)).addClass("current").siblings().removeClass("current");
+        });
+        $(".left_btn").click(function(){
+            if(page>1){
+                $picDiv.animate({left:"+="+$pDiv_w+'px'},"normal");
+                page--;
+                $(".rightButton").css({'background':'url(images/rightstart.jpg) no-repeat'});
+                if(page<=1){
+                    $(this).css({'background':'url(images/leftstop.jpg) no-repeat'});
+                }else{
+                    $(this).css({'background':'url(images/leftstart.jpg) no-repeat'});
+                }
+            }
+            $(this).siblings(".highlight_tip").find("span").eq((page-1)).addClass("current").siblings().removeClass("current");
+        });
+    }
+    setInterval(move, 500);
+</script>
+</body>
+
+</html>
