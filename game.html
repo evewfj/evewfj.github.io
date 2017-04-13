@@ -54,18 +54,19 @@
             document.body.appendChild(item);
         }
     }
-    function loop() {
+    function update() {
         for (var index = 0; index < items.length; ++index) {
             var item = items[index];
             if (item.style.top == '' || parseInt(item.style.top) >= clientHeight) {
                 item.style.top = '-80px';
             }
-
+            
+            item.style.color = getRandomColor();
             item.style.top = (parseInt(item.style.top) + speed) + 'px';
         }
     }
 
-    setInterval(loop, 100);
+    setInterval(update, 100);
     setInterval(generate, 1000);
     document.addEventListener('keydown', function (evt) {
         console.log(evt);
