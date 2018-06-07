@@ -186,11 +186,11 @@
         <subPane>
           <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="littlepanpan.github.io" />
+              <option name="myItemId" value="evewfj.github.io" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="littlepanpan.github.io" />
+              <option name="myItemId" value="evewfj.github.io" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -213,7 +213,7 @@
     <property name="js-jscs-nodeInterpreter" value="D:\Program Files\nodejs\node.exe" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
-  <component name="RunManager" selected="JavaScript Debug.littlepanpan.github.com">
+  <component name="RunManager" selected="JavaScript Debug.evewfj.github.com">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -514,7 +514,7 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="littlepanpan.github.io" />
+      <module name="evewfj.github.io" />
       <envs />
       <method />
     </configuration>
@@ -594,11 +594,11 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
-    <configuration default="false" name="littlepanpan.github.com" type="JavascriptDebugType" factoryName="JavaScript Debug" engineId="8c3a3ae2-1760-455d-a17f-ffa1747e2979" uri="http://localhost:63342/littlepanpan.github.io/imgloopshow.html">
+    <configuration default="false" name="evewfj.github.com" type="JavascriptDebugType" factoryName="JavaScript Debug" engineId="8c3a3ae2-1760-455d-a17f-ffa1747e2979" uri="http://localhost:63342/evewfj.github.io/imgloopshow.html">
       <method />
     </configuration>
     <list size="1">
-      <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.littlepanpan.github.com" />
+      <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.evewfj.github.com" />
     </list>
   </component>
   <component name="SbtLocalSettings">
