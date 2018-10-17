@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .imgsShow {
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        #imgsContainer {
+            width: 2500px;
+            position: relative;
+            right: 10px;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        
+        .imgsShow ul li {
+            width: 300px;
+            height: 200px;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            display: block;
+            float: left;
+        }
+        
+        .imgsShow ul img {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        
+        .imgsShow ul {
+            list-style: none;
+            display: inline;
+            float: left;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        
+        #leftButton {
+            width: 32px;
+            height: 50px;
+            background-image: url("img/leftstart.jpg");
+            position: fixed;
+            top: 75px;
+            left: 20px;
+            visibility: hidden;
+        }
+        
+        #rightButton {
+            width: 32px;
+            height: 50px;
+            background-image: url("img/rightstart.jpg");
+            position: fixed;
+            top: 75px;
+            right: 20px;
+            visibility: hidden;
+        }
+        
+        .imgsShow:hover #leftButton {
+            visibility: visible;
+        }
+        
+        .imgsShow:hover #rightButton {
+            visibility: visible;
+        }
+        
+        .redBorder {
+            border: 1px solid red;
+        }
+        
+        .borderRound5 {
+            border-radius: 5px;
+        }
+        .borderRound12 {
+            border-radius: 12px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="imgsShow" id="imgsShowStage">
+    
+    <div id="imgsContainer">
+        <ul id="u1">
+            <li>
+                <a href="#"><img src="img/img1.jpg"/></a>
+            </li>
+            <li>
+                <a href="#"><img src="img/img2.jpg"/></a>
+            </li>
+            <li>
+                <a href="#"><img src="img/img3.jpg"/></a>
+            </li>
+            <li>
+                <a href="#"><img src="img/img4.jpg"/></a>
+            </li>
+        </ul>
+        <ul id="u2"></ul>
+    </div>
+    <div id="leftButton"></div>
+    <div id="rightButton"></div>
+</div>
+<script>
+    var container = document.getElementById("imgsContainer");
+    var showStage = document.getElementById("imgsShowStage");
+    var showStageWidth = showStage.clientWidth;
+    //past u1 to u2.
+    var u1 = document.getElementById("u1");
+    var u2 = document.getElementById("u2");
+    u2.innerHTML = u1.innerHTML;
+    //calculate the container width.
+    var itemNum = u1.children.length;//ul列表中li的个数.
+    var itemMem = u1.children[0];//获得li中第一个图片.
+    var itemWidth = itemMem.clientWidth;//获得此图片的宽度.
+    u1.style.width = itemWidth * itemNum + 'px';//计算出ul的长度
+    container.style.width = itemWidth * itemNum * 2 + 'px';//计算图片容器的长度.
+    var firstImgsContainerWidth = itemWidth * itemNum;//this is u1 width
+
+    var lastPosition = 0;
+
+    var directoin = 'left';
+    function move() {
+        if (directoin === 'left') {
+            lastPosition += 10;
+            if (lastPosition >= firstImgsContainerWidth) {
+                lastPosition = 0;
+            }
+        }
+        else {
+            lastPosition -= 10;
+            if (lastPosition <= firstImgsContainerWidth - showStageWidth) {
+                lastPosition += firstImgsContainerWidth;
+            }
+
+        }
+        container.style.left = -lastPosition + 'px';
+    }
+    setInterval(move, 100);
+
+    var leftButton = document.getElementById('leftButton');
+    var rightButton = document.getElementById('rightButton');
+    leftButton.addEventListener('click', function (evt) {
+        console.log('you have click leftbutton ');
+        directoin = 'left';
+    });
+    rightButton.addEventListener('click', function (evt) {
+        console.log('you have click rightButton');
+        console.log(evt);
+        directoin = 'right';
+
+    });
+
+    leftButton.addEventListener('dblclick', function (evt) {
+        console.log(evt);
+        var that = evt.target;
+        if (that.style.background == 'url("img/leftstop.jpg")') {
+            that.style.background = 'url("img/leftstart.jpg")';
+        } else {
+            that.style.background = 'url("img/leftstop.jpg")';
+        }
+        console.log(that.style);
+
+        if (that.className == '') {
+            that.className = 'redBorder borderRound5';
+        }else{
+            that.className = ''
+        }
+        that.className = that.className.replace('borderRound5','borderRound12');
+        
+
+    });
+
+
+</script>
+</body>
+
+</html>

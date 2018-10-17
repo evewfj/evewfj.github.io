@@ -1,0 +1,70 @@
+
+<html>
+
+<head>
+    <style>
+        #old {
+            font-size: 8px;
+            background-color: #ccc;
+        }
+    </style>
+
+</head>
+
+<body onload="getData()">
+    <input id='query' type="text">
+    <button id='btnGet'>查询</button>
+    <div id='newDiv'>
+        <div id='myDiv' style="font:12px '微软雅黑';">内容：</div>
+        <div id='desc' style="color:red;">分类：</div>
+        <a id='url'></a>
+    </div>
+    <div id='old'></div>
+
+</body>
+<script>
+    var keyword = '%E5%AD%A6%E4%B9%A0';
+    var btn = document.getElementById('btnGet');
+    var old = document.getElementById('old');
+    var newDiv = document.getElementById('newDiv');
+
+    function getData(keyword) {
+        keyword = keyword || '%E5%AD%A6%E4%B9%A0';
+        var url = 'http://baike.baidu.com/api/openapi/BaikeLemmaCardApi?scope=103&format=json&appid=379020&bk_key=' + keyword + '&bk_length=600';
+
+        var xmlhttp = null;
+        if (window.XMLHttpRequest) {
+            //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                old.innerHTML += newDiv.innerHTML;
+                var data = xmlhttp.responseText;
+                var div = document.getElementById("myDiv");
+                var desc = document.getElementById("desc");
+                var url = document.getElementById("url");
+                var jdata = JSON.parse(data);
+                div.innerHTML = jdata.abstract;
+                desc.innerHTML = jdata.desc;
+                url.href = jdata.url;
+                url.innerHTML = '去查看-->' + jdata.title;
+                console.log(data);
+                btn.innerHTML = '加载完成！';
+            }
+        }
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+    }
+    btn.addEventListener('click', function(evt) {
+        var query = document.getElementById('query');
+        var key = query.value;
+        getData(key);
+    });
+</script>
+
+</html>
