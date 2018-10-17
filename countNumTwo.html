@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <a id="click" href="javascript:">点击</a>
+    <span id="count"></span>
+    <script type="text/javascript">
+        var local_count = window.localStorage.getItem('COUNT') || 0;
+        var $count = document.getElementById('count');
+        $count.innerHTML = local_count;
+        document.getElementById('click').onclick = function() {
+            window.localStorage.setItem('COUNT', local_count++);
+            $count.innerHTML = local_count;
+        }
+    </script>
+</body>
+
+</html>

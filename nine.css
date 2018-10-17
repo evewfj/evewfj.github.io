@@ -1,0 +1,26 @@
+/*设置最大最小高度和宽度就能保证随着屏幕的大小变化我们的div不会乱了布局*/
+.box{
+/*vm兼容IE9*/
+    width: 100vm;
+    height: 100vm;
+    width: 100vmin;
+    height: 100vmin;
+/*margin(margin-top: 0; margin-bottom: 0;  margin-left: auto; margin-right: auto;)左右宽度自适应，即居中*/
+    margin: 0 auto;    
+/*top right bottom left是绝对位置，必须与absolute共用才能生效*/
+    position: absolute;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.content {
+     float: left;
+     background-color: #ff9900;
+     border-radius: 20%;
+     width: 30%;
+/*padding-bottom设置与width一样的比例保证盒子是正方形的，因为宽度继承了父亲的宽度*/
+     padding-bottom: 30%;
+     margin: 1%;
+     display: inline-block;
+ }
